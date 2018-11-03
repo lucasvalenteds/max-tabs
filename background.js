@@ -79,6 +79,14 @@ browser.tabs.onAttached.addListener((tabId, attachInfo) => {
   }
 });
 
+const filter = {
+  properties: ["pinned"]
+}
+
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+  queryNumTabs().then(updateButton);
+}, filter);
+
 browser.windows.onFocusChanged.addListener(windowId => {
   queryNumTabs().then(updateButton);
 });
